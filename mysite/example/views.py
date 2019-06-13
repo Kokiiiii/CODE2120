@@ -43,11 +43,10 @@ def fib(request):
 	log = []
 	if request.method == "POST":
 		try:
-
 			data = request.POST["data"]
 			received = json.loads(data)
 			jsob.update(received)
-
+			
 			#######################
 			#Custom Function Below#
 			#######################
@@ -64,7 +63,7 @@ def fib(request):
 			for l in loop:
 				numarray.append(fibno)
 				fibno = fibno+addno
-				addno = fibbno-addno
+				addno = fibno-addno
 
 			return JsonResponse({"fib":numarray})
 		except Exception as e:
@@ -73,3 +72,5 @@ def fib(request):
 			fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
 			errorType = str(exc_type)
 			return JsonResponse({"isError": True, "error":str(e), "errorType":errorType, "function":fname, "line":exc_tb.tb_lineno, "log":log})		
+	else:
+		return HttpResponse("NOT RIGHT")
