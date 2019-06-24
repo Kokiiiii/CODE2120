@@ -113,3 +113,4 @@ def test(request):
 			return JsonResponse({"isError": True, "error":str(e), "errorType":errorType, "function":fname, "line":exc_tb.tb_lineno, "log":log})		
 	else:
 		return JsonResponse(jsob)		
+
