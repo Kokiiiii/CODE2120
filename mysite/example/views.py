@@ -78,7 +78,7 @@ def fib(request):
 
 @csrf_exempt
 def test(request):
-	jsob = {"starNumber": 1, "length": 10} #defaults
+	jsob = {"startNumber": 0, "length": 10, "multiNumber": 2, "maximum": 50000} #defaults
 	log = []
 	if request.method == "POST":
 		try:
@@ -91,20 +91,24 @@ def test(request):
 			#######################
 			startNumber = int(jsob["startNumber"])
 			length = int(jsob["length"])
+			multiNumber = int(jsob["multiNumber"])
+			maximum = int(jsob["maximum"])
 			loop = range(length)
 
 
 			numarray = []
 
 			baseno = startNumber
-			multino = 2
+
 
 			for l in loop:
-				numarray.append(baseno)
-				baseno = baseno*multino
-				
+				if baseno < maximum:
+					numarray.append(baseno)
+					baseno = baseno*multiNumber
+					
 
 			return JsonResponse({"test":numarray})
+
 		except Exception as e:
 			exc_type, exc_obj, exc_tb = sys.exc_info()
 			other = sys.exc_info()[0].__name__
