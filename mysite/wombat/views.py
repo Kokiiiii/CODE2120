@@ -11,8 +11,32 @@ def assignment1(request):
 	log = []
 	if request.method == "POST":
 		try:
-			
-			return JsonResponse({"assignment1":"numarray"})
+			data = request.POST["data"]
+			received = json.loads(data)
+			jsob.update(received)
+
+			#######################
+			#Custom Function Below#
+			#######################
+			startNumber = int(jsob["startNumber"])
+			length = int(jsob["length"])
+			multiNumber = int(jsob["multiNumber"])
+			maximum = int(jsob["maximum"])
+			loop = range(length)
+
+
+			numarray = []
+
+			baseno = startNumber
+
+
+			for l in loop:
+				if baseno < maximum:
+					numarray.append(baseno)
+					baseno = baseno*multiNumber
+					
+
+			return JsonResponse({"assignment1":numarray})
 
 		except Exception as e:
 			exc_type, exc_obj, exc_tb = sys.exc_info()
